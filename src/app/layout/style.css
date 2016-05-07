@@ -1,0 +1,141 @@
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.clickable {
+  cursor: pointer;
+  outline: none;
+}
+
+.tabeli-filtreerimine > div > li {
+  pointer-events: none;
+}
+
+th > span.fa.fa-sort-amount-desc, span.fa.fa-sort-amount-asc {
+  display: none;
+}
+
+th.st-sort-ascent > span.fa.fa-sort-amount-asc, th.st-sort-descent > span.fa.fa-sort-amount-desc {
+  display: initial;
+}
+
+th.st-sort-ascent > span.fa.fa-sort, th.st-sort-descent > span.fa.fa-sort {
+  display: none;
+}
+
+.form-group > textarea {
+  height: 109px;
+}
+
+tr > td > span.badge-right {
+  float: right;
+}
+
+.table > tbody > tr > td,
+.table > thead > tr > th {
+  vertical-align: middle;
+}
+
+span.help-block-inline {
+  display: inline;
+  margin-left: 10px;
+}
+
+.tooted-tegevused {
+  width: 159px;
+}
+
+.liikmed-tegevused {
+  width: 160px;
+}
+
+@media (max-width: 480px) {
+  .tooted-tegevused {
+    width: 120px;
+  }
+
+  .liikmed-tegevused {
+    width: 121px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hidden-xxs {
+    display: none;
+  }
+}
+
+@media (min-width: 1210px) {
+  .modal-lg2 {
+    width: 1200px;
+  }
+}
+
+@media (min-width: 990px) and (max-width: 1210px) {
+  .modal-lg2 {
+    width: 90%;
+    margin-left: 5%;
+  }
+}
+
+.has-feedback-inventuur-tk > span.form-control-feedback {
+  top: 0px;
+  right: 37px;
+}
+
+.has-feedback-inventuur-addon > span.form-control-feedback {
+  top: 0px;
+  right: 35px;
+}
+
+#inventuur-sooritajad > h4 {
+  margin-top: 25px;
+}
+
+#inventuur-sooritajad > span.label.plural {
+  float: left;
+  padding-top: 0.4em;
+  padding-right: 0.6em;
+  padding-bottom: 0.5em;
+  padding-left: 0.6em;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+span.label-lg {
+  font-size: 100%;
+  float: left;
+  padding-top: 0.5em;
+  padding-right: 0.6em;
+  padding-bottom: 0.4em;
+  padding-left: 0.6em;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+div.input-group > input.form-control.form-control-left {
+  border-top-right-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
+}
+
+div.input-group > input.form-control.form-control-right {
+  border-top-left-radius: 4px !important;
+  border-bottom-left-radius: 4px !important;
+}
+
+.tehinguliik-tooltip {
+  margin-bottom: 3px;
+}
+
+.inventuur button span {
+  background-color: #75ef2b;
+  border-radius: 32px;
+  color: black;
+}

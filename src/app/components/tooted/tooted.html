@@ -1,0 +1,110 @@
+<div class="row">
+  <!-- Otsing -->
+  <div class="col-sm-6 col-md-8 form-group">
+    <div class="input-group">
+      <div class="input-group-addon"><i class="fa fa-search"></i></div>
+      <input ng-model="otsing" type="search" placeholder="Otsi toodet" class="form-control">
+    </div>
+  </div>
+
+  <!-- Filtreerimine -->
+  <div class="col-xs-6 col-sm-3 col-md-2 form-group">
+    <div class="btn-group btn-block" uib-dropdown auto-close="outsideClick" keyboard-nav="true">
+      <button class="btn btn-info btn-block" type="button" uib-dropdown-toggle>
+        <i class="fa fa-filter"></i> Filtreeri <i class="caret"></i>
+      </button>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+        <li role="menuitem" ng-click="vm.filter.kategooriad[k.nimi]=!vm.filter.kategooriad[k.nimi]" ng-repeat="k in vm.kategooriad track by k.id">
+          <a><span class="fa fa-check" ng-show="vm.filter.kategooriad[k.nimi]"></span> {{k.nimi}}</a>
+        </li>
+        <li class="divider"></li>
+        <li role="menuitem" ng-click="vm.filter.kasutuses=!vm.filter.kasutuses">
+          <a href><i class="fa fa-thumbs-up filter-icon"></i><span class="fa fa-check" ng-show="vm.filter.kasutuses"></span> Kasutuses</a>
+        </li>
+        <li role="menuitem" ng-click="vm.filter.arhiveeritud=!vm.filter.arhiveeritud">
+          <a href><i class="fa fa-archive filter-icon"></i><span class="fa fa-check" ng-show="vm.filter.arhiveeritud"></span> Arhiveeritud</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Toote lisamine -->
+  <div class="col-xs-6 col-sm-3 col-md-2 form-group">
+    <label type="button" class="btn btn-success btn-block" ng-click="vm.lisaToode()"><i class="fa fa-plus-circle"></i> Uus toode</label>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table st-table="tootedDisplay" st-safe-src="vm.tooted" class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th st-sort="nimi" st-sort-default="true" class="clickable">
+            Nimi
+            <span class="fa fa-sort-amount-desc"></span>
+            <span class="fa fa-sort-amount-asc"></span>
+            <span class="fa fa-sort"></span>
+          </th>
+          <th st-sort="kogus" class="clickable">
+            Kogus
+            <span class="fa fa-sort-amount-desc"></span>
+            <span class="fa fa-sort-amount-asc"></span>
+            <span class="fa fa-sort"></span>
+          </th>
+          <th st-sort="omahind" class="clickable hidden-xs">
+            Omahind
+            <span class="fa fa-sort-amount-desc"></span>
+            <span class="fa fa-sort-amount-asc"></span>
+            <span class="fa fa-sort"></span>
+          </th>
+          <th st-sort="muugihind" class="clickable hidden-xs">
+            Müügihind
+            <span class="fa fa-sort-amount-desc"></span>
+            <span class="fa fa-sort-amount-asc"></span>
+            <span class="fa fa-sort"></span>
+          </th>
+          <th st-sort="aegumiskuupaev" class="clickable hidden-xs">
+            Aegumiskuupäev
+            <span class="fa fa-sort-amount-desc"></span>
+            <span class="fa fa-sort-amount-asc"></span>
+            <span class="fa fa-sort"></span>
+          </th>
+          <th class="tooted-tegevused">
+            Tegevused
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="toode in tootedDisplay | tooted:vm.filter | filter:otsing track by toode.id" ng-class="{'danger': toode.aegumas}">
+          <td>{{toode.nimi}} <span class="label label-info">{{toode.badge}}</span></td>
+          <td>{{toode.kogus}}</td>
+          <td class="hidden-xs">{{toode.omahind | currency}}</td>
+          <td class="hidden-xs">{{toode.muugihind | currency}}</td>
+          <td class="hidden-xs">
+            {{toode.aegumiskuupaev | date:'d. MMMM yyyy'}} <span class="badge badge-right" uib-tooltip="Kogus">{{toode.aeguvaKogus}}</span>
+          </td>
+          <td>
+            <button type="button" class="btn btn-success btn-sm" uib-tooltip="Kanna lattu" ng-click="vm.sisseost(toode.id)" ng-disabled="toode.arhiveeritud">
+              <i class="fa fa-plus"></i>
+            </button>
+            <button type="button" class="btn btn-warning btn-sm" uib-tooltip="Kanna maha" ng-click="vm.mahaKandmine(toode.id)" ng-disabled="toode.arhiveeritud">
+              <i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-default btn-sm" uib-tooltip="Muuda" ng-click="vm.muuda(toode.id)">
+              <i class="fa fa-pencil"></i>
+            </button>
+            <button type="button" class="btn btn-danger btn-sm hidden-xxs" uib-tooltip="Kustuta" ng-click="vm.kustuta(toode.id)" ng-if="toode.kustutatav && !toode.arhiveeritud">
+              <i class="fa fa-trash-o"></i>
+            </button>
+            <button type="button" class="btn btn-danger btn-sm hidden-xxs" uib-tooltip="Arhiveeri" ng-click="vm.arhiveeri(toode.id)" ng-if="!toode.kustutatav && !toode.arhiveeritud" ng-disabled="toode.kogus!=0">
+              <i class="fa fa-archive"></i>
+            </button>
+            <button type="button" class="btn btn-info btn-sm hidden-xxs" uib-tooltip="Võta kasutusse" ng-click="vm.ennista(toode.id)" ng-if="toode.arhiveeritud">
+              <i class="fa fa-undo"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

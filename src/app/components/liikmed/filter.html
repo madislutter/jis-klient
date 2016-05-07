@@ -1,0 +1,18 @@
+<ul class="dropdown-menu" uib-dropdown-menu role="menu">
+  <li role="menuitem" ng-click="vm.filter.ettemaksuga=!vm.filter.ettemaksuga">
+    <a href><i class="fa fa-plus filter-icon"></i><span class="fa fa-check" ng-show="vm.filter.ettemaksuga"></span> Ettemaksuga</a>
+  </li>
+  <li role="menuitem" ng-click="vm.filter.nullis=!vm.filter.nullis">
+    <a href><i class="fa fa-meh-o filter-icon"></i><span class="fa fa-check" ng-show="vm.filter.nullis"></span> Nullis</a>
+  </li>
+  <li role="menuitem" ng-click="vm.filter.volaga=!vm.filter.volaga">
+    <a href><i class="fa fa-minus filter-icon"></i><span class="fa fa-check" ng-show="vm.filter.volaga"></span> Võlaga</a>
+  </li>
+  <li class="divider"></li>
+  <li role="menuitem" ng-click="vm.filter.kasutuses=!vm.filter.kasutuses">
+    <a href><i class="fa fa-thumbs-up filter-icon"></i><span class="fa fa-check" ng-show="vm.filter.kasutuses"></span> Kasutuses</a>
+  </li>
+  <li role="menuitem" ng-click="vm.filter.arhiveeritud=!vm.filter.arhiveeritud">
+    <a href><i class="fa fa-archive filter-icon"></i><span class="fa fa-check" ng-show="vm.filter.arhiveeritud"></span> Arhiveeritud</a>
+  </li>
+</ul>

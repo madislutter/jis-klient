@@ -1,0 +1,58 @@
+<form name="taaraViimine_form" novalidate autocomplete="off">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="vm.loobu()"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title">Taara ära viimine</h3>
+  </div>
+  <div class="modal-body">
+      <div class="row">
+        <div class="col-xs-12">
+
+          <div class="form-group" ng-class="{'has-error': taaraViimine_form.summa.$invalid && taaraViimine_form.summa.$dirty, 'has-success': taaraViimine_form.summa.$valid && taaraViimine_form.summa.$touched}">
+            <label>
+              Summa
+              <span class="help-block help-block-inline">
+                <small>Mitme euro eest taarat ära viisid?</small>
+              </span>
+            </label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-euro fa-fw"></i></div>
+              <input type="number" prohibit-zero name="summa" ng-model="vm.tehing.deebet.summa" ng-change="vm.tehing.kreedit.summa=vm.tehing.deebet.summa" class="form-control" placeholder="188.40" min="0" pattern="[0-9]*(\.[0-9]{1}0*)?" required autofocus>
+            </div>
+            <div class="control-label" ng-messages="taaraViimine_form.summa.$error" ng-show="taaraViimine_form.summa.$dirty" role="alert">
+              <p ng-message="required">Summa peab olema määratud!</p>
+              <p ng-message="number">See ei ole legaalne number! <small>Kasuta koma asemel punkti.</small></p>
+              <p ng-message="zero">Summa peab olema suurem kui null!</p>
+              <p ng-message="min">Summa peab olema suurem kui null!</p>
+              <p ng-message="pattern">Summa ei või olla täpsem kui üks komakoht!</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Raha sain</label>
+            <br>
+            <label class="radio-inline">
+              <input type="radio" name="makseviis" ng-model="vm.tehing.deebet.tuup" value="arvelRaha" required> Pangakontole
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="makseviis" ng-model="vm.tehing.deebet.tuup" value="sularaha" required> Sulas
+            </label>
+          </div>
+   
+        </div>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-xs-6">
+        <button class="btn btn-default btn-block" type="button" ng-click="vm.loobu()">
+          <span class="fa fa-ban"></span> Loobu
+        </button>
+      </div>
+      <div class="col-xs-6">
+        <button type="submit" class="btn btn-success btn-block" ng-click="vm.kinnita()" ng-disabled="taaraViimine_form.$invalid">
+          <span class="fa fa-save"></span> Kinnita
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

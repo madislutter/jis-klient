@@ -1,0 +1,13 @@
+.nav > li > a, .navbar-header > .navbar-brand {
+  outline: none;
+}
+
+#varade-seis-nav > li > a {
+  padding: 15px 6px;
+  font-size: 13px;
+  cursor: default;
+}
+
+#varade-seis-nav > li > a#varade-seis-nav-kokku {
+  padding-left: 15px;
+}

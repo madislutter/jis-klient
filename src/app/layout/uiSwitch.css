@@ -1,0 +1,13 @@
+.switch {
+/*  width: 80px;
+  height: 10px;*/
+}
+.switch small {
+  /* button */
+}
+.switch.checked {
+  /* frame when enabled */
+}
+.switch.checked small {
+  /* button when enabled */
+}

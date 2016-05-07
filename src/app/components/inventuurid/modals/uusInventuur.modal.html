@@ -1,0 +1,198 @@
+<form name="uus_inventuur_form" novalidate autocomplete="off">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="vm.loobu()"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title">Uus inventuur</h3>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading"><i class="fa fa-qrcode"></i> Tooted</div>
+          <table class="table table-bordered">
+            <thead>
+              <th>Nimi</th>
+              <th class="text-center">Eeldatav</th>
+              <th>Loetud</th>
+            </thead>
+            <tbody>
+              <tr ng-repeat="toode in vm.inventuur.tooted track by toode.id">
+                <td>{{::toode.nimi}} <span class="label label-info">{{::toode.badge}}</span></td>
+                <td class="text-center">{{::toode.eeldatavKogus}} tk</td>
+                <td>
+                  <div class="input-group has-feedback-inventuur-tk" ng-class="{'has-warning': toode.loetudKogus!=toode.eeldatavKogus, 'has-success': toode.loetudKogus==toode.eeldatavKogus, 'has-error': uus_inventuur_form[toode.id].$invalid}">
+                    <input type="number" name="{{toode.id}}" class="form-control" ng-model="toode.loetudKogus" ng-change="vm.onKaubaKogusChanged()" min="0" required>
+                    <span class="form-control-feedback glyphicon glyphicon-remove" ng-if="uus_inventuur_form[toode.id].$invalid"></span>
+                    <span class="form-control-feedback glyphicon glyphicon-warning-sign" ng-if="uus_inventuur_form[toode.id].$valid && toode.loetudKogus!=toode.eeldatavKogus"></span>
+                    <span class="form-control-feedback glyphicon glyphicon-ok" ng-if="toode.loetudKogus==toode.eeldatavKogus"></span>
+                    <div class="input-group-addon">tk</div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">Muud varad</div>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Vara</th>
+                <th class="text-center">Eeldatav</th>
+                <th>Loetud</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><i class="fa fa-recycle"></i> Tühi taara</td>
+                <td class="text-center">{{::vm.inventuur.eeldatav.tuhiTaara | currency}}</td>
+                <td>
+                  <div class="input-group has-feedback has-feedback-inventuur-addon" ng-class="{'has-success': vm.tuhiTaaraVordne(), 'has-warning': uus_inventuur_form.tuhiTaara.$valid && !vm.tuhiTaaraVordne(), 'has-error': uus_inventuur_form.tuhiTaara.$invalid}">
+                    <input class="form-control" type="number" name="tuhiTaara" ng-model="vm.inventuur.loetud.tuhiTaara" step="0.1" min="0" pattern="[0-9]*(\.[0-9]{1,2}0*)?" required>
+                    <span class="form-control-feedback glyphicon glyphicon-remove" ng-if="uus_inventuur_form.tuhiTaara.$invalid"></span>
+                    <span class="form-control-feedback glyphicon glyphicon-warning-sign" ng-if="uus_inventuur_form.tuhiTaara.$valid && !vm.tuhiTaaraVordne()"></span>
+                    <span class="form-control-feedback glyphicon glyphicon-ok" ng-if="vm.tuhiTaaraVordne()"></span>
+                    <div class="input-group-addon"><i class="fa fa-euro"></i></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-money"></i> Sularaha</td>
+                <td class="text-center">{{::vm.inventuur.eeldatav.sularaha | currency}}</td>
+                <td>
+                  <div class="input-group has-feedback has-feedback-inventuur-addon" ng-class="{'has-success': vm.sularahaVordne(), 'has-warning': uus_inventuur_form.sularaha.$valid && !vm.sularahaVordne(), 'has-error': uus_inventuur_form.sularaha.$invalid}">
+                    <input class="form-control" type="number" name="sularaha" ng-model="vm.inventuur.loetud.sularaha" ng-change="vm.uuendaLoetudKokku()" min="0" pattern="[0-9]*(\.[0-9]{1,2}0*)?" required>
+                    <span class="form-control-feedback glyphicon glyphicon-remove" ng-if="uus_inventuur_form.sularaha.$invalid"></span>
+                    <span class="form-control-feedback glyphicon glyphicon-warning-sign" ng-if="uus_inventuur_form.sularaha.$valid && !vm.sularahaVordne()"></span>
+                    <span class="form-control-feedback glyphicon glyphicon-ok" ng-if="vm.sularahaVordne()"></span>
+                    <div class="input-group-addon"><i class="fa fa-euro"></i></div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading"><i class="fa fa-calculator"></i> Kokkuvõte</div>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Vara</th>
+                <th class="text-center">Eeldatav</th>
+                <th class="text-center">Loetud</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><i class="fa fa-qrcode"></i> Tooted</td>
+                <td class="text-center">{{::vm.inventuur.eeldatav.tootedKokku | currency}}</td>
+                <td class="text-center">{{vm.inventuur.loetud.tootedKokku | currency}}</td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-recycle"></i> Taara</td>
+                <td class="text-center"><span uib-tooltip="Sellest {{vm.inventuur.eeldatav.kaubaTaara|currency}} moodustab kauba taara">{{::vm.inventuur.eeldatav.taara | currency}}</span></td>
+                <td class="text-center"><span uib-tooltip="Sellest {{vm.inventuur.loetud.kaubaTaara|currency}} moodustab kauba taara">{{vm.inventuur.loetud.taara | currency}}</span></td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-money"></i> Sularaha</td>
+                <td class="text-center">{{::vm.inventuur.eeldatav.sularaha | currency}}</td>
+                <td class="text-center">{{vm.inventuur.loetud.sularaha | currency}}</td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-bank"></i> Pangakonto</td>
+                <td colspan="2" class="text-center">{{::vm.inventuur.eeldatav.arvelRaha | currency}}</td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-male"></i> Krediit</td>
+                <td colspan="2" class="text-center">{{::vm.inventuur.eeldatav.krediit | currency}}</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th><i class="fa fa-calculator"></i> Kokku</th>
+                <th class="text-center">{{::vm.inventuur.eeldatav.kokku | currency}}</th>
+                <th class="text-center">{{vm.inventuur.loetud.kokku | currency}}</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="form-group">
+          <label>Märkmed</label>
+          <textarea name="selgitus" ng-model="vm.inventuur.kommentaar" class="form-control" placeholder="Põhjendan siin, miks numbrid kohe üldse ei klapi."></textarea>
+        </div>
+      </div>
+      <!-- <div class="col-sm-4">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group" ng-class="{'has-error': (uus_inventuur_form.kuupaev.$invalid && uus_inventuur_form.kuupaev.$touched && uus_inventuur_form.kuupaev.$dirty) || uus_inventuur_form.$error.dateDisabled}">
+              <label>Inventuuri kuupäev</label>
+              <div class="input-group">
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="vm.datepickerOpen=!vm.datepickerOpen"><span class="fa fa-calendar fa-fw"></span></button>
+                </div>
+                <input name="kuupaev" type="text" class="form-control" ng-model="vm.inventuur.aeg" uib-datepicker-popup="d. MMMM yyyy" alt-input-formats="vm.inputFormats" is-open="vm.datepickerOpen" datepicker-options="vm.datepickerOptions" show-button-bar="false" popup-placement="top" ng-focus="vm.datepickerOpen=true" on-open-focus="false" required>
+              </div>
+              <div class="control-label" ng-messages="uus_inventuur_form.kuupaev.$error" ng-show="uus_inventuur_form.kuupaev.$touched && uus_inventuur_form.kuupaev.$dirty" role="alert">
+                <p ng-message="required">Tehingu kuupäev peab olema määratud!</p>
+                <p ng-message="date">See ei ole legaalne kuupäev!</p>
+              </div>
+              <div class="control-label" ng-messages="uus_inventuur_form.$error" ng-show="uus_inventuur_form.$error.dateDisabled" role="alert">
+                <p ng-message="dateDisabled">Ennustamine ei ole lubatud!</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12">
+            <div class="form-group" ng-class="{'has-error': uus_inventuur_form.kell.$invalid && uus_inventuur_form.kell.$touched && uus_inventuur_form.kell.$dirty}">
+              <label>Inventuuri kellaaeg</label>
+              <uib-timepicker name="kell" ng-model="vm.inventuur.kell" show-meridian="false" show-seconds="true" show-spinners="false" required></uib-timepicker>
+              <div class="control-label" ng-messages="uus_inventuur_form.kell.$error" ng-show="uus_inventuur_form.kell.$touched && uus_inventuur_form.kell.$dirty" role="alert">
+                <p ng-message="required">Inventuuri kellaaeg peab olema määratud!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <div class="col-sm-4">
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <h4><i class="fa fa-calendar"></i> Inventuuri sooritamise hetk</h4>
+            {{vm.inventuur.aeg | date:'d. MMMM yyyy HH:mm:ss'}}
+          </div>
+          <hr>
+          <div class="col-xs-12 text-center" id="inventuur-sooritajad">
+            <h4>
+              <i class="fa fa-user"></i> <ng-pluralize count="vm.inventuur.sooritajad.length || 0" when="{'0': 'Inventuuri sooritaja', '1': 'Inventuuri sooritaja' , 'other': 'Inventuuri sooritajad'}"></ng-pluralize>
+            </h4>
+            <tags-input name="sooritajad" ng-model="vm.inventuur.sooritajad" display-property="nimi" placeholder="Lisa sooritaja..." replace-spaces-with-dashes="false" add-from-autocomplete-only="true" required>
+              <auto-complete source="vm.liigeAutoComplete($query)" display-property="nimi" load-on-down-arrow="true" load-on-empty="true" load-on-focus="true" min-length="0" max-results-to-show="5"></auto-complete>
+            </tags-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-xs-6">
+        <button type="button" class="btn btn-default btn-block" ng-click="vm.loobu()">
+          <span class="fa fa-ban"></span> Loobu
+        </button>
+      </div>
+      <div class="col-xs-6">
+        <button type="submit" class="btn btn-success btn-block" ng-click="vm.salvesta()" ng-disabled="uus_inventuur_form.$invalid">
+          <span class="fa fa-save"></span> Salvesta
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

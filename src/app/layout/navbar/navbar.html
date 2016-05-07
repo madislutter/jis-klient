@@ -1,0 +1,63 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Joogikassa rakendus -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href>
+        <i class="fa fa-beer"></i> Joogivanema rakendus
+      </a>
+
+      <button class="navbar-toggle btn-navbar" type="button" ng-init="navCollapsed=true" ng-click="navCollapsed=!navCollapsed">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <!-- Varade seis -->
+    <ul id="varade-seis-nav" class="nav navbar-nav hidden-xs">
+      <li tooltip-placement="bottom" uib-tooltip="Sularaha">
+        <a href><span class="fa fa-money"></span> {{vm.sularaha | currency}}</a>
+      </li>
+      <li tooltip-placement="bottom" uib-tooltip="Pangakontol">
+        <a href><span class="fa fa-bank"></span> {{vm.arvelRaha | currency}}</a>
+      </li>
+      <li tooltip-placement="bottom" uib-tooltip="Põhjalaste võlg joogikassa ees">
+        <a href><span class="fa fa-male"></span> {{vm.krediit | currency}}</a>
+      </li>
+      <li tooltip-placement="bottom" uib-tooltip="Kauba all">
+        <a href><span class="fa fa-qrcode"></span> {{vm.tooted | currency}}</a>
+      </li>
+      <li tooltip-placement="bottom" uib-tooltip="Taara all">
+        <a href><span class="fa fa-recycle"></span> {{vm.taara | currency}}</a>
+      </li>
+      <li tooltip-placement="bottom" uib-tooltip="Joogikassa koguväärtus">
+        <a href id="varade-seis-nav-kokku"><span class="fa fa-calculator"></span> {{vm.varadKokku | currency}}</a>
+      </li>
+    </ul>
+
+    <!-- Menüü -->
+    <ul class="nav navbar-nav navbar-right collapse navbar-collapse" uib-collapse="navCollapsed">
+      <li ui-sref-active="active">
+        <a href ui-sref="tooted" ng-click="navCollapsed=true"><i class="fa fa-qrcode"></i> Tooted</a>
+      </li>
+      <li ui-sref-active="active">
+        <a href ui-sref="liikmed" ng-click="navCollapsed=true"><i class="fa fa-users"></i> Liikmed</a>
+      </li>
+      <li ui-sref-active="active">
+        <a href ui-sref="tehingud" ng-click="navCollapsed=true"><i class="fa fa-credit-card"></i> Tehingud</a>
+      </li>
+      <li ui-sref-active="active">
+        <a href ui-sref="inventuurid" ng-click="navCollapsed=true"><i class="fa fa-eye"></i> Inventuurid</a>
+      </li>
+<!--       <li class="disabled">
+        <a href ng-click="navCollapsed=true"><i class="fa fa-line-chart"></i> Statistika</a>
+      </li> -->
+      <li ui-sref-active="active">
+        <a href ui-sref="seaded" ng-click="navCollapsed=true"><i class="fa fa-cog"></i> Seaded</a>
+      </li>
+      <li class="disabled">
+        <a href ng-click="navCollapsed=true"><i class="fa fa-unlock"></i> Logi välja</a>
+      </li>
+    </ul>
+  </div>
+</nav>

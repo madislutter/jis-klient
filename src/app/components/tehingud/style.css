@@ -1,0 +1,12 @@
+.tehing-detailne-deebet-kreedit-row > div > h3 {
+  margin-top: 0px;
+}
+
+ul.dropdown-menu > li > a > i.filter-icon {
+  float: right;
+  margin-top: 5px;
+}
+
+#tehing-filter {
+  width: 210px;
+}

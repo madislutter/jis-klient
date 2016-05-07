@@ -1,0 +1,93 @@
+<form name="toode_form" novalidate autocomplete="off">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="vm.loobu()"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title">Toote muutmine</h3>
+  </div>
+  <div class="modal-body">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          <div class="form-group" ng-class="{'has-error': toode_form.nimi.$invalid && toode_form.nimi.$touched}">
+            <label>Nimi</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-info fa-fw"></i></div>
+              <input type="text" name="nimi" ng-model="vm.toode.nimi" class="form-control" required>
+            </div>
+            <div class="control-label" ng-messages="toode_form.nimi.$error" ng-show="toode_form.nimi.$touched" role="alert">
+              <p ng-message="required">Tootel peab olema nimi!</p>
+            </div>
+          </div>
+
+          <div class="form-group" ng-if="vm.omabTaarat" ng-class="{'has-error': toode_form.taara.$invalid}">
+            <label>Taara</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-recycle fa-fw"></i></div>
+              <input type="text" name="taara" ng-model="vm.toode.taara" class="form-control" ng-required="vm.omabTaarat">
+            </div>
+            <div class="control-label" ng-messages="toode_form.taara.$error">
+              <p ng-message="required">Taaraga tootelt ei saa taarat eemaldada!</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Ühiku kogus</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-balance-scale fa-fw"></i></div>
+              <input type="text" name="uhikuKogus" ng-model="vm.toode.uhikuKogus" class="form-control" >
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+          <div class="form-group" ng-class="{'has-error': toode_form.muugihind.$invalid && (toode_form.muugihind.$touched || toode_form.muugihind.$dirty)}">
+            <label>Müügihind</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-euro fa-fw"></i></div>
+              <input type="number" pattern="[0-9]*(\.[0-9]{1,2}0*)?" prohibit-zero min="0" name="muugihind" ng-model="vm.toode.muugihind" class="form-control" step="0.1" required>
+            </div>
+            <div class="control-label" ng-messages="toode_form.muugihind.$error" ng-show="toode_form.muugihind.$touched || toode_form.muugihind.$dirty" role="alert">
+              <p ng-message="required">Tootel peab olema müügihind!</p>
+              <p ng-message="number">See ei ole legaalne number! <small>Kasuta koma asemel punkti.</small></p>
+              <p ng-message="min">Müügihind peab olema suurem kui null!</p>
+              <p ng-message="zero">Müügihind peab olema suurem kui null!</p>
+              <p ng-message="pattern">Müügihind ei või olla täpsem kui kaks komakohta!</p>
+            </div>
+          </div>
+         
+          <div class="form-group">
+            <label>Triipkood</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-qrcode fa-fw"></i></div>
+              <input type="text" name="triipkood" ng-model="vm.toode.triipkood" class="form-control">
+              <div class="input-group-btn">
+                <button class="btn btn-default" uib-tooltip="Skanneeri kaameraga" tabindex="-1"><span class="fa fa-camera fa-fw"></span></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Kategooriad</label>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-tags fa-fw"></i></span>
+              <tags-input name="kategooriad" ng-model="vm.toode.kategooriad" display-property="nimi" placeholder="Lisa kategooria..." replace-spaces-with-dashes="false">
+                <auto-complete source="vm.kategooriaAutoComplete($query)" display-property="nimi" load-on-down-arrow="true" load-on-empty="true" load-on-focus="true" min-length="0" max-results-to-show="5"></auto-complete>
+              </tags-input>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-xs-6">
+        <button type="button" class="btn btn-default btn-block" ng-click="vm.loobu()">
+          <span class="fa fa-ban"></span> Loobu
+        </button>
+      </div>
+      <div class="col-xs-6">
+        <button type="submit" class="btn btn-success btn-block" ng-click="vm.salvesta()" ng-disabled="toode_form.$invalid || toode_form.$pristine">
+          <span class="fa fa-save"></span> Salvesta
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

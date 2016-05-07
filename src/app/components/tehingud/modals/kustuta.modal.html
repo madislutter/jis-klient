@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="vm.loobu()"><span aria-hidden="true">&times;</span></button>
+  <h3 class="modal-title">Tehingu kustutamine</h3>
+</div>
+<div class="modal-body">
+  <p>Tehingut ei saa hiljem taastada. Kas oled kindel, et soovid jätkata?</p>
+</div>
+<div class="modal-footer">
+  <div class="row">
+    <div class="col-xs-6">
+      <button type="button" class="btn btn-default btn-block" ng-click="vm.loobu()">
+        <span class="fa fa-ban"></span> Loobu
+      </button>
+    </div>
+    <div class="col-xs-6">
+      <button type="button" class="btn btn-danger btn-block" ng-click="vm.kustuta()">
+        <span class="fa fa-trash-o"></span> Kustuta
+      </button>
+    </div>
+  </div>
+</div>

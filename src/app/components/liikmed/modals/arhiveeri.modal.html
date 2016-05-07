@@ -1,0 +1,48 @@
+<form name="arhiveerimine_form" novalidate autocomplete="off">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="vm.loobu()"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title">Liikme arhiveerimine</h3>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <div ng-if="vm.liige.saldo == 0">
+          <p>Liikme {{vm.liige.nimi}} saldo on nullis. Seega arhiveerimine on täiesti ohutu.</p>
+          <p>Kas soovid jätkata?</p>
+        </div>
+        <div ng-if="vm.liige.saldo < 0">
+          <p>Liikme <strong>{{vm.liige.nimi}}</strong> saldo on {{vm.liige.saldo | currency}}. Arhiveerimise korral tema võlg joogikassa ees kustutatakse. Mõistlikum oleks temalt võlg enne arhiveerimist sisse nõuda.</p>
+        </div>
+        <div ng-if="vm.liige.saldo > 0">
+          <p>Liikme <strong>{{vm.liige.nimi}}</strong> saldo on {{vm.liige.saldo | currency}}. Arhiveerimise korral tema ettemaks joogikassas kustutatakse. Mõistlikum oleks talle ettemaks enne arhiveerimist tagastada.</p>
+        </div>
+
+        <div ng-if="vm.liige.saldo!=0">
+          <p>Kui soovid liiget siiski arhiveerida, siis kirjuta tema nimi siia.</p>
+            <div class="form-group" ng-class="{'has-error': arhiveerimine_form.nimi.$invalid && arhiveerimine_form.nimi.$touched, 'has-success': arhiveerimine_form.nimi.$valid}">
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>
+                <input type="text" name="nimi" pattern="{{vm.liige.nimi}}" ng-trim="false" ng-model="vm.kinnitus" class="form-control" required>
+              </div>
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-xs-6">
+        <button class="btn btn-default btn-block" type="button" ng-click="vm.loobu()">
+          <span class="fa fa-ban"></span> Loobu
+        </button>
+      </div>
+      <div class="col-xs-6">
+        <button class="btn btn-danger btn-block" type="submit" ng-click="vm.kinnita()" ng-disabled="arhiveerimine_form.$invalid">
+          <span class="fa fa-archive"></span> Arhiveeri liige
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

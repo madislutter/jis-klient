@@ -1,0 +1,44 @@
+{
+  "id": "ax7Gji",
+  "nimi": "A. Le Coq Premium",
+  "taara": "klaaspudel",
+  "uhikuKogus": "0,5l",
+  "kogus": 100,
+  "omahind": 0.652,
+  "muugihind": 1,
+  "triipkood": "982763489",
+  "arhiveeritud": false,
+  "kustutatav": false,
+  "kategooriad": [
+    {
+      "id": "oaisj0",
+      "nimi": "õlu"
+    }
+  ],
+  "batchid": [
+    {
+      "id": "oipsjo",
+      "aegumiskuupaev": "2016-12-06T06:36:09Z",
+      "laoseis": 20,
+      "uhikuHind": 0.76,
+      "ostukogus": 20,
+      "ostuhetk": "2016-01-01T06:36:09Z"
+    },
+    {
+      "id": "oipsjy",
+      "aegumiskuupaev": "2017-12-06T06:36:09Z",
+      "laoseis": 40,
+      "uhikuHind": 0.6,
+      "ostukogus": 40,
+      "ostuhetk": "2016-01-01T06:37:09Z"
+    },
+    {
+      "id": "oipsjt",
+      "aegumiskuupaev": "2018-06-06T06:36:09Z",
+      "laoseis": 40,
+      "uhikuHind": 0.65,
+      "ostukogus": 40,
+      "ostuhetk": "2016-01-01T06:38:09Z"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+<form name="sisseost_form" novalidate autocomplete="off">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="vm.loobu()"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title">Kauba lattu kandmine</h3>
+  </div>
+  <div class="modal-body">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group" ng-if="!vm.toodeReadonly" ng-class="{'has-error': sisseost_form.nimi.$invalid && sisseost_form.nimi.$touched, 'has-success': sisseost_form.nimi.$valid && sisseost_form.nimi.$touched}">
+            <label>Toode</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-info fa-fw"></i></div>
+              <input type="text" name="nimi" ng-model="vm.tehing.deebet.toode" class="form-control" autofocus uib-typeahead="toode as toode.nimi for toode in vm.tooted | filter:{nimi:$viewValue} | limitTo:8" typeahead-editable="false" typeahead-select-on-blur="true" typeahead-template-url="app/components/tooted/typeaheadTemplate.html" required>
+            </div>
+          </div>
+
+          <div class="form-group" ng-if="vm.toodeReadonly">
+            <label>Toode</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-info fa-fw"></i></div>
+              <input type="text" name="nimi" ng-model="vm.tehing.deebet.toode.nimi" class="form-control" readonly required>
+            </div>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': sisseost_form.kogus.$invalid && sisseost_form.kogus.$dirty, 'has-success': sisseost_form.kogus.$valid && sisseost_form.kogus.$touched}">
+            <label>Kogus</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-balance-scale fa-fw"></i></div>
+              <input type="number" pattern="[0-9]*(\.0*)?" prohibit-zero name="kogus" ng-model="vm.tehing.deebet.kogus" class="form-control" placeholder="20" step="1" min="0" required focus-if="vm.toodeReadonly" ng-change="vm.uuendaUhikuHind()">
+            </div>
+            <div class="control-label" ng-messages="sisseost_form.kogus.$error" ng-show="sisseost_form.kogus.$dirty" role="alert">
+              <p ng-message="required">Kogus peab olema määratud!</p>
+              <p ng-message="number">See ei ole legaalne number!</p>
+              <p ng-message="min">Kogus peab olema suurem kui null!</p>
+              <p ng-message="zero">Kogus peab olema suurem kui null!</p>
+              <p ng-message="pattern">Kogus peab olema täisarv!</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group" ng-class="{'has-error': sisseost_form.ostuhind.$invalid && sisseost_form.ostuhind.$dirty, 'has-success': sisseost_form.ostuhind.$valid && sisseost_form.ostuhind.$touched}">
+                <label>
+                  Hind kokku
+                  <span class="help-block help-block-inline"><small>ilma taarata</small></span>
+                </label>
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-euro fa-fw"></i></div>
+                  <input type="number" name="ostuhind" ng-model="vm.tehing.deebet.summa" class="form-control" placeholder="18.84" min="0" pattern="[0-9]*(\.[0-9]{1,2}0*)?" required ng-change="vm.syncSumma()">
+                </div>
+                <div class="control-label" ng-messages="sisseost_form.ostuhind.$error" ng-show="sisseost_form.ostuhind.$dirty" role="alert">
+                  <p ng-message="required">Ostuhind peab olema määratud!</p>
+                  <p ng-message="number">See ei ole legaalne number! <small>Kasuta koma asemel punkti.</small></p>
+                  <p ng-message="min">Ostuhind peab olema positiivne!</p>
+                  <p ng-message="pattern">Ostuhind ei või olla täpsem kui kaks komakohta!</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Ühiku hind</label>
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-euro fa-fw"></i></div>
+                  <input type="number" name="uhikuHind" ng-model="vm.tehing.deebet.uhikuHind" class="form-control" required readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Makseviis</label>
+            <br>
+            <label class="radio-inline">
+              <input type="radio" name="makseviis" ng-model="vm.tehing.kreedit.tuup" value="arvelRaha" ng-change="vm.syncMakseviis()" required> Pangakontolt
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="makseviis" ng-model="vm.tehing.kreedit.tuup" value="sularaha" ng-change="vm.syncMakseviis()" required> Sularahas
+            </label>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': sisseost_form.aegumiskuupaev.$invalid && sisseost_form.aegumiskuupaev.$touched && sisseost_form.aegumiskuupaev.$dirty, 'has-success': sisseost_form.aegumiskuupaev.$valid && sisseost_form.aegumiskuupaev.$touched}">
+            <label>
+              Aegumiskuupäev
+              <span class="help-block help-block-inline"><small>Kui on mitu erinevat kuupäeva, siis tee iga kuupäeva jaoks oma kanne.</small></span>
+            </label>
+            <div class="input-group">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="vm.datepickerToggle()"><span class="fa fa-calendar fa-fw"></span></button>
+              </div>
+              <input type="text" name="aegumiskuupaev" class="form-control" ng-model="vm.tehing.deebet.aegumiskuupaev" uib-datepicker-popup="d. MMMM yyyy" alt-input-formats="vm.inputFormats" is-open="vm.datepickerOpen" datepicker-options="vm.datepickerOptions" show-button-bar="false" popup-placement="top" placeholder="{{vm.datePlaceholder | date:'dd. MMMM yyyy'}}" required>
+            </div>
+            <div class="control-label" ng-messages="sisseost_form.aegumiskuupaev.$error" ng-show="sisseost_form.aegumiskuupaev.$touched && sisseost_form.aegumiskuupaev.$dirty" role="alert">
+              <p ng-message="required">Aegumiskuupäev peab olema määratud!</p>
+              <p ng-message="date">See ei ole legaalne kuupäev!</p>
+              <p ng-message="dateDisabled">See kuupäev ei ole lubatud!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-xs-6">
+        <button class="btn btn-default btn-block" type="button" ng-click="vm.loobu()">
+          <span class="fa fa-ban"></span> Loobu
+        </button>
+      </div>
+      <div class="col-xs-6">
+        <button type="submit" class="btn btn-success btn-block" ng-click="vm.kinnita()" ng-disabled="sisseost_form.$invalid">
+          <span class="fa fa-save"></span> Kinnita
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,4 @@
+<a>
+  <span ng-bind-html="match.model.nimi | uibTypeaheadHighlight:query"></span> 
+  <span class="label" ng-class="{'label-success': match.model.saldo >= 0, 'label-danger': match.model.saldo < 0}">{{match.model.saldo | currency}}</span>
+</a>

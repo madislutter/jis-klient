@@ -1,0 +1,47 @@
+<form name="sularahaArvelt_form" novalidate autocomplete="off">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="vm.loobu()"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title">Sularaha väljavõtt</h3>
+  </div>
+  <div class="modal-body">
+      <div class="row">
+        <div class="col-xs-12">
+
+          <div class="form-group" ng-class="{'has-error': sularahaArvelt_form.summa.$invalid && sularahaArvelt_form.summa.$dirty, 'has-success': sularahaArvelt_form.summa.$valid && sularahaArvelt_form.summa.$touched}">
+            <label>
+              Summa
+              <span class="help-block help-block-inline">
+                <small>Mitu eurot arvelt võtsid?</small>
+              </span>
+            </label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-euro fa-fw"></i></div>
+              <input type="number" name="summa" ng-model="vm.tehing.deebet.summa" ng-change="vm.tehing.kreedit.summa=vm.tehing.deebet.summa" class="form-control" placeholder="18.84" min="0" prohibit-zero pattern="[0-9]*(\.[0-9]{1,2}0*)?" required autofocus>
+            </div>
+            <div class="control-label" ng-messages="sularahaArvelt_form.summa.$error" ng-show="sularahaArvelt_form.summa.$dirty" role="alert">
+              <p ng-message="required">Summa peab olema määratud!</p>
+              <p ng-message="number">See ei ole legaalne number! <small>Kasuta koma asemel punkti.</small></p>
+              <p ng-message="zero">Summa peab olema suurem kui null!</p>
+              <p ng-message="min">Summa peab olema suurem kui null!</p>
+              <p ng-message="pattern">Summa ei või olla täpsem kui kaks komakohta!</p>
+            </div>
+          </div>
+   
+        </div>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-xs-6">
+        <button class="btn btn-default btn-block" type="button" ng-click="vm.loobu()">
+          <span class="fa fa-ban"></span> Loobu
+        </button>
+      </div>
+      <div class="col-xs-6">
+        <button type="submit" class="btn btn-success btn-block" ng-click="vm.kinnita()" ng-disabled="sularahaArvelt_form.$invalid">
+          <span class="fa fa-save"></span> Kinnita
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

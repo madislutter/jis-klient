@@ -1,0 +1,31 @@
+{
+  "id": "owiaej",
+  "aeg": "2016-01-01T06:38:09Z",
+  "selgitus": "Ostsin Premiumit sisse",
+  "looja": {
+    "id": "casdnc",
+    "staatus": "ksv!",
+    "nimi": "Madis Martin Lutter"
+  },
+  "muudetav": true,
+  "legaalne": true,
+  "arhiveerimistunnus": "",
+  "kreedit": {
+    "tuup": "arvelRaha",
+    "summa": 26
+  },
+  "deebet": {
+    "tuup": "toode",
+    "summa": 26,
+    "id": "ax7Gji",
+    "kogus": 40,
+    "batch": {
+      "id": "oipsjt",
+      "aegumiskuupaev": "2018-06-06T06:36:09Z",
+      "laoseis": 0,
+      "uhikuHind": 0.65,
+      "ostukogus": 40,
+      "ostuhetk": "2016-01-01T06:38:09Z"
+    }
+  }
+}

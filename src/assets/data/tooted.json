@@ -1,0 +1,62 @@
+[
+  {
+    "id": "ax7Gji",
+    "nimi": "A. Le Coq Premium",
+    "taara": "pudel",
+    "uhikuKogus": "0,5l",
+    "kogus": 100,
+    "omahind": 0.652,
+    "muugihind": 1,
+    "triipkood": "982763489",
+    "aegumiskuupaev": "2016-12-06T06:36:09Z",
+    "aeguvaKogus": 20,
+    "arhiveeritud": false,
+    "kustutatav": false,
+    "kategooriad": [
+      {
+        "id": "oaisj0",
+        "nimi": "õlu"
+      }
+    ]
+  },
+  {
+    "id": "239e8h",
+    "nimi": "A. Le Coq Special",
+    "taara": "purk",
+    "uhikuKogus": "1 pint",
+    "kogus": 60,
+    "omahind": 0.833,
+    "muugihind": 1,
+    "triipkood": "32986489",
+    "aegumiskuupaev": "2016-04-06T06:36:09Z",
+    "aeguvaKogus": 20,
+    "arhiveeritud": false,
+    "kustutatav": false,
+    "kategooriad": [
+      {
+        "id": "oaisj0",
+        "nimi": "õlu"
+      }
+    ]
+  },
+  {
+    "id": "100e8h",
+    "nimi": "Milka Daim",
+    "taara": "",
+    "uhikuKogus": "100 grammi",
+    "kogus": 10,
+    "omahind": 0.88,
+    "muugihind": 13.37,
+    "triipkood": "98793280",
+    "aegumiskuupaev": "2018-04-06T06:36:09Z",
+    "aeguvaKogus": 10,
+    "arhiveeritud": false,
+    "kustutatav": false,
+    "kategooriad": [
+      {
+        "id": "oadej0",
+        "nimi": "toit"
+      }
+    ]
+  }
+]

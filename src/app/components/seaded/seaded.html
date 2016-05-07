@@ -1,0 +1,120 @@
+<form name="seaded_form" novalidate autocomplete="off">
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading"><i class="fa fa-key"></i> Parooli vahetamine</div>
+        <div class="panel-body">
+          <div class="form-group">
+            <label>Uus parool</label>
+            <input type="password" name="parool1" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Korda uut parooli</label>
+            <input type="password" name="parool2" class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading"><i class="fa fa-laptop"></i> Süsteemi seaded</div>
+        <div class="panel-body">
+          <div class="form-group">
+            <label>Taara hind</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-recycle"></i></div>
+              <input type="number" name="taaraHind" class="form-control">
+              <div class="input-group-addon"><i class="fa fa-euro"></i></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Joogivanemad</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-user"></i></div>
+              <input type="text" name="joogivanemad" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Revisjonikomisoni liikmed</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-legal"></i></div>
+              <input type="text" name="revisjon" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Esimees</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-user-secret"></i></div>
+              <input type="text" name="taaraHind" class="form-control">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading"><i class="fa fa-envelope"></i> Automaatmeilid</div>
+        <div class="panel-body">
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="automaatmeilid" ng-model="vm.seaded">
+              Saada automaatmeile
+            </label>
+          </div>
+          
+          <div class="form-group">
+            <label uib-tooltip="Liige ei saa kirju sellest intervallist tihemini.">Mitu päeva oodata automaatmeilide saatmise vahel?</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-hourglass-start"></i></div>
+              <input type="number" name="paevad" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Mis kell meile saata?</label>
+            <uib-timepicker ng-model="vm.automaatmeilid.kell" show-meridian="false" show-spinners="false" name="kell" required></uib-timepicker>
+          </div>
+
+          <div class="form-group">
+            <label uib-tooltip="Pea meeles, et nädalavahetusel ülekanded ei liigu.">Mis päeviti meile saata?</label>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="esmaspaev" ng-model="vm.automaatmeilid.paev.e"> E
+              </label>
+              <label>
+                <input type="checkbox" name="teisipaev" ng-model="vm.automaatmeilid.paev.t"> T
+              </label>
+              <label>
+                <input type="checkbox" name="kolmapaev" ng-model="vm.automaatmeilid.paev.k"> K
+              </label>
+              <label>
+                <input type="checkbox" name="neljapaev" ng-model="vm.automaatmeilid.paev.n"> N
+              </label>
+              <label>
+                <input type="checkbox" name="reede" ng-model="vm.automaatmeilid.paev.r"> R
+              </label>
+              <label>
+                <input type="checkbox" name="laupaev" ng-model="vm.automaatmeilid.paev.l"> L
+              </label>
+              <label>
+                <input type="checkbox" name="puhapaev" ng-model="vm.automaatmeilid.paev.p"> P
+              </label>
+            </div>
+          </div>
+          <p>Automaatmeilide mallid ja reeglid</p>
+          <p>Teavita mind, kui liikmele on saadetud nii mitu meili ja vahepeal pole ettemaksu laekunud.</p>
+        </div>
+      </div>
+    </div>
+    
+    <p>Teavita mind, kui sooritatakse uus inventuur</p>
+    <p>Teavita mind, kui inventuuri muudetakse</p>
+    <p>Teavita mind, kui lisatakse tehing inventuurieelsesse aega</p>
+  </div>
+</form>

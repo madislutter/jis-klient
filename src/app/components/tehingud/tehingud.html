@@ -1,0 +1,121 @@
+<div class="row">
+  <!-- Otsing -->
+  <div class="col-sm-4 col-lg-4">
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input ng-model="otsing" type="search" placeholder="Otsi tehingut" class="form-control">
+      </div>
+    </div>
+  </div>
+
+  <!-- Aja järgi filtreerimine -->
+  <form name="ajafilter">
+    <div class="col-sm-4 col-lg-2 form-group" ng-class="{'has-error': ajafilter.alates.$invalid}">
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="vm.alatesOpen=true"><span class="fa fa-calendar fa-fw"></span> Alates</button>
+        </div>
+        <input name="alates" class="form-control form-control-left" type="text" ng-model="vm.daterangeFilter.alates" uib-datepicker-popup="d. MMMM yyyy" alt-input-formats="vm.inputFormats" is-open="vm.alatesOpen" datepicker-options="vm.daterangeAlatesOptions" show-button-bar="false" popup-placement="bottom" ng-change="vm.daterangeKuniOptions.minDate=vm.daterangeFilter.alates" ng-focus="vm.alatesOpen=true" on-open-focus="false">
+      </div>
+    </div>
+    <div class="col-sm-4 col-lg-2 form-group" ng-class="{'has-error': ajafilter.kuni.$invalid}">
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="vm.kuniOpen=true"><span class="fa fa-calendar fa-fw"></span> Kuni</button>
+        </div>
+        <input name="kuni" class="form-control form-control-left" type="text" ng-model="vm.daterangeFilter.kuni" uib-datepicker-popup="d. MMMM yyyy" alt-input-formats="vm.inputFormats" is-open="vm.kuniOpen" datepicker-options="vm.daterangeKuniOptions" show-button-bar="false" popup-placement="bottom" ng-change="vm.daterangeAlatesOptions.maxDate=vm.daterangeFilter.kuni" ng-focus="vm.kuniOpen=true" on-open-focus="false">
+      </div>
+    </div>
+  </form>
+
+  <!-- Liigi järgi filtreerimine -->
+  <div class="col-xs-6 col-lg-2 form-group">
+    <div class="btn-group btn-block" uib-dropdown auto-close="outsideClick" keyboard-nav="true">
+      <button class="btn btn-info btn-block" type="button" uib-dropdown-toggle>
+        <i class="fa fa-filter"></i> Filtreeri <i class="caret"></i>
+      </button>
+      <ul class="dropdown-menu" uib-dropdown-menu template-url="app/components/tehingud/filter.html" role="menu"></ul>
+    </div>
+  </div>
+
+  <!-- Tehingu lisamine -->
+  <div class="col-xs-6 col-lg-2 form-group">
+    <div class="btn-group btn-block" uib-dropdown keyboard-nav>
+      <label type="button" class="btn btn-success col-xs-10" ng-click="vm.lisaUusTehing()">
+        <i class="fa fa-plus-circle"></i> Uus tehing
+      </label>
+      <label type="button" class="btn btn-success col-xs-2" uib-dropdown-toggle>
+        <i class="fa fa-caret-down"></i>
+      </label>
+      <ul uib-dropdown-menu role="menu" aria-labelledby="simple-button-keyboard-nav" class="dropdown-menu-right">
+        <li role="menuitem"><a ng-click="vm.taaraViimine()">Taara ära viimine</a></li>
+        <li role="menuitem"><a ng-click="vm.sulaArvele()">Sularaha arvele</a></li>
+        <li role="menuitem"><a ng-click="vm.sulaArvelt()">Sularaha väljavõtt</a></li>
+        <li role="menuitem"><a ng-click="vm.tulu()">Tulu</a></li>
+        <li role="menuitem"><a ng-click="vm.kulu()">Kulu</a></li>
+        <li class="divider"></li>
+        <li role="menuitem"><a ng-click="vm.ettemaks()">Ettemaks</a></li>
+        <li role="menuitem"><a ng-click="vm.tarbimine()">Tarbimine</a></li>
+        <li role="menuitem"><a ng-click="vm.sisseost()">Toote sisseost</a></li>
+        <li role="menuitem"><a ng-click="vm.mahaKandmine()">Toote mahakandmine</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table st-table="tehingudDisplay" st-safe-src="vm.tehingud" class="table table-bordered table-hover table-condensed">
+      <thead>
+        <tr>
+          <th style="width: 65px">
+            Tehing
+          </th>
+          <th>
+            Summa
+          </th>
+          <th st-sort="selgitus" class="clickable hidden-xs">
+            Selgitus
+            <span class="fa fa-sort-amount-desc"></span>
+            <span class="fa fa-sort-amount-asc"></span>
+            <span class="fa fa-sort"></span>
+          </th>
+          <th st-sort="aeg" st-sort-default="reverse" class="clickable">
+            Aeg
+            <span class="fa fa-sort-amount-desc"></span>
+            <span class="fa fa-sort-amount-asc"></span>
+            <span class="fa fa-sort"></span>
+          </th>
+          <th style="width: 86px">
+            Tegevused
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="tehing in tehingudDisplay | filter:otsing | tehinguLiik:vm.tehinguLiikFilter track by tehing.id" ng-class="vm.tehinguKlass(tehing)">
+          <td>
+            <span tehingu-liik="tehing.kreedit"></span> <i class="fa fa-long-arrow-right"></i> <span tehingu-liik="tehing.deebet"></span>
+          </td>
+          <td>
+            {{tehing.kreedit.summa | currency}} <i class="fa fa-long-arrow-right"></i> {{tehing.deebet.summa | currency}}
+          </td>
+          <td class="hidden-xs">
+            {{tehing.selgitus}}
+          </td>
+          <td>
+            {{tehing.aeg | date:'HH:mm EEEE, d. MMMM yyyy'}}
+          </td>
+          <td>
+            <button type="button" class="btn btn-default btn-sm" uib-tooltip="Muuda" ng-click="vm.muuda(tehing.id)">
+              <i class="fa fa-pencil"></i>
+            </button>
+            <button type="button" class="btn btn-danger btn-sm" uib-tooltip="Kustuta" ng-click="vm.kustuta(tehing.id)" ng-disabled="!tehing.muudetav">
+              <i class="fa fa-trash-o"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

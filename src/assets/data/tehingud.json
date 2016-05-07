@@ -1,0 +1,205 @@
+[
+  {
+    "id": "owiaej",
+    "aeg": "2016-01-01T06:38:09Z",
+    "selgitus": "Ostsin Premiumit sisse",
+    "muudetav": true,
+    "legaalne": true,
+    "kreedit": {
+      "tuup": "arvelRaha",
+      "summa": 26
+    },
+    "deebet": {
+      "tuup": "toode",
+      "summa": 26,
+      "nimi": "A. Le Coq Premium"
+    }
+  },
+  {
+    "id": "owiarj",
+    "aeg": "2016-01-01T06:38:09Z",
+    "selgitus": "Ostsin Premiumit sisse (taara)",
+    "muudetav": true,
+    "legaalne": true,
+    "kreedit": {
+      "tuup": "arvelRaha",
+      "summa": 4
+    },
+    "deebet": {
+      "tuup": "taara",
+      "summa": 4
+    }
+  },
+  {
+    "id": "owi3ej",
+    "aeg": "2016-01-01T06:37:09Z",
+    "selgitus": "Ostsin veel Premiumit sisse",
+    "muudetav": true,
+    "legaalne": true,
+    "kreedit": {
+      "tuup": "arvelRaha",
+      "summa": 24
+    },
+    "deebet": {
+      "tuup": "toode",
+      "summa": 24,
+      "nimi": "A. Le Coq Premium"
+    }
+  },
+  {
+    "id": "ows3ej",
+    "aeg": "2016-01-01T06:37:09Z",
+    "selgitus": "Ostsin veel Premiumit sisse (taara)",
+    "muudetav": true,
+    "legaalne": true,
+    "kreedit": {
+      "tuup": "arvelRaha",
+      "summa": 4
+    },
+    "deebet": {
+      "tuup": "taara",
+      "summa": 4
+    }
+  },
+  {
+    "id": "4wi3ej",
+    "aeg": "2016-01-01T06:36:09Z",
+    "selgitus": "Ostsin veel Premiumit sisse 2",
+    "muudetav": true,
+    "legaalne": true,
+    "kreedit": {
+      "tuup": "arvelRaha",
+      "summa": 15.2
+    },
+    "deebet": {
+      "tuup": "toode",
+      "summa": 15.2,
+      "nimi": "A. Le Coq Premium"
+    }
+  },
+  {
+    "id": "4fi3ej",
+    "aeg": "2016-01-01T06:36:09Z",
+    "selgitus": "Ostsin veel Premiumit sisse 2 (taara)",
+    "muudetav": true,
+    "legaalne": true,
+    "kreedit": {
+      "tuup": "arvelRaha",
+      "summa": 2
+    },
+    "deebet": {
+      "tuup": "taara",
+      "summa": 2
+    }
+  },
+  {
+    "id": "4we3ej",
+    "aeg": "2016-01-02T06:37:09Z",
+    "selgitus": "Ostsin Specialit sisse",
+    "muudetav": true,
+    "legaalne": true,
+    "kreedit": {
+      "tuup": "arvelRaha",
+      "summa": 14
+    },
+    "deebet": {
+      "tuup": "toode",
+      "summa": 14,
+      "nimi": "A. Le Coq Special"
+    }
+  },
+  {
+    "id": "4we3de",
+    "aeg": "2016-01-02T06:37:09Z",
+    "selgitus": "Ostsin Specialit sisse (taara)",
+    "muudetav": true,
+    "legaalne": true,
+    "kreedit": {
+      "tuup": "arvelRaha",
+      "summa": 2
+    },
+    "deebet": {
+      "tuup": "taara",
+      "summa": 2
+    }
+  },
+  {
+    "id": "4re3ej",
+    "aeg": "2016-01-02T06:37:09Z",
+    "selgitus": "Ostsin veel Specialit sisse",
+    "muudetav": true,
+    "legaalne": true,
+    "kreedit": {
+      "tuup": "arvelRaha",
+      "summa": 36
+    },
+    "deebet": {
+      "tuup": "toode",
+      "summa": 36,
+      "nimi": "A. Le Coq Special"
+    }
+  },
+  {
+    "id": "4dsiej",
+    "aeg": "2016-01-02T06:37:09Z",
+    "selgitus": "Ostsin veel Specialit sisse (taara)",
+    "muudetav": true,
+    "legaalne": true,
+    "kreedit": {
+      "tuup": "arvelRaha",
+      "summa": 4
+    },
+    "deebet": {
+      "tuup": "taara",
+      "summa": 4
+    }
+  },
+  {
+    "id": "ste3ej",
+    "aeg": "2016-01-03T06:37:09",
+    "selgitus": "Ostsin šokolaadi sisse",
+    "muudetav": true,
+    "legaalne": true,
+    "kreedit": {
+      "tuup": "arvelRaha",
+      "summa": 8.8
+    },
+    "deebet": {
+      "tuup": "toode",
+      "summa": 8.8,
+      "nimi": "Milka Daim"
+    }
+  },
+  {
+    "id": "ioubgb",
+    "aeg": "2016-01-04T06:36:09.005Z",
+    "selgitus": "Müüsin liikmele toote",
+    "muudetav": true,
+    "legaalne": true,
+    "kreedit": {
+      "tuup": "toode",
+      "summa": 0.76,
+      "nimi": "A. Le Coq Premium"
+    },
+    "deebet": {
+      "tuup": "liige",
+      "summa": 1,
+      "nimi": "Kaarel Ratas"
+    }
+  },
+  {
+    "id": "io7bgb",
+    "aeg": "2016-01-04T07:36:09.005Z",
+    "selgitus": "Ostsin pastakaid",
+    "muudetav": true,
+    "legaalne": true,
+    "kreedit": {
+      "tuup": "sularaha",
+      "summa": 3.5
+    },
+    "deebet": {
+      "tuup": "tuhi",
+      "summa": 0
+    }
+  }
+]

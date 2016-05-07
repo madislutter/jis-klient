@@ -1,0 +1,62 @@
+<form name="uus_liige_form" novalidate autocomplete="off">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="vm.loobu()"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title">Uue liikme loomine</h3>
+  </div>
+  <div class="modal-body">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          <div class="form-group" ng-class="{'has-error': uus_liige_form.nimi.$invalid && uus_liige_form.nimi.$touched}">
+            <label>Nimi</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>
+              <input type="text" name="nimi" ng-model="vm.uusLiige.nimi" placeholder="Majaka Vaht" class="form-control" required autofocus>
+            </div>
+            <div class="control-label" ng-messages="uus_liige_form.nimi.$error" ng-show="uus_liige_form.nimi.$touched && uus_liige_form.nimi.$dirty" role="alert">
+              <p ng-message="required">Liikmel peab olema nimi!</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Koondis</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-home fa-fw"></i></div>
+              <input type="text" ng-model="vm.uusLiige.koondis" class="form-control" placeholder="Tartu">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+          <div class="form-group">
+            <label>Meiliaadress</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></div>
+              <input type="email" ng-model="vm.uusLiige.meiliaadress" class="form-control" placeholder="majakavaht@gmail.com">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Telefon</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-phone fa-fw"></i></div>
+              <input type="tel" maxlength="13" ng-model="vm.uusLiige.telefon" class="form-control" placeholder="55123321">
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-xs-6">
+        <button type="button" class="btn btn-default btn-block" ng-click="vm.loobu()">
+          <span class="fa fa-ban"></span> Loobu
+        </button>
+      </div>
+      <div class="col-xs-6">
+        <button type="submit" class="btn btn-success btn-block" ng-click="vm.salvesta()" ng-disabled="uus_liige_form.$invalid">
+          <span class="fa fa-save"></span> Salvesta
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

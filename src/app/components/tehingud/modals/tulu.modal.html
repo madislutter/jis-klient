@@ -1,0 +1,59 @@
+<form name="tulu_form" novalidate autocomplete="off">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="vm.loobu()"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title">Tulu</h3>
+  </div>
+  <div class="modal-body">
+      <div class="row">
+        <div class="col-xs-12">
+
+          <div class="form-group" ng-class="{'has-error': tulu_form.summa.$invalid && tulu_form.summa.$dirty, 'has-success': tulu_form.summa.$valid && tulu_form.summa.$touched}">
+            <label>Summa</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-euro fa-fw"></i></div>
+              <input type="number" name="summa" ng-model="vm.tehing.deebet.summa" class="form-control" placeholder="18.84" min="0" prohibit-zero pattern="[0-9]*(\.[0-9]{1,2}0*)?" required autofocus>
+            </div>
+            <div class="control-label" ng-messages="tulu_form.summa.$error" ng-show="tulu_form.summa.$dirty" role="alert">
+              <p ng-message="required">Summa peab olema määratud!</p>
+              <p ng-message="number">See ei ole legaalne number! <small>Kasuta koma asemel punkti.</small></p>
+              <p ng-message="zero">Summa peab olema suurem kui null!</p>
+              <p ng-message="min">Summa peab olema suurem kui null!</p>
+              <p ng-message="pattern">Summa ei või olla täpsem kui kaks komakohta!</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="radio-inline">
+              <input type="radio" name="makseviis" ng-model="vm.tehing.deebet.tuup" value="arvelRaha" required> Pangakontole
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="makseviis" ng-model="vm.tehing.deebet.tuup" value="sularaha" required> Sularahas
+            </label>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': tulu_form.selgitus.$invalid && tulu_form.selgitus.$touched, 'has-success': tulu_form.selgitus.$valid && tulu_form.selgitus.$touched}">
+            <label>Selgitus</label>
+            <textarea name="selgitus" ng-model="vm.tehing.selgitus" class="form-control" placeholder="Täiesti ootamatult selgus, et A. Le Coq tahab meile palju pappi anda." required></textarea>
+            <div class="control-label" ng-messages="tulu_form.selgitus.$error" ng-show="tulu_form.selgitus.$touched">
+              <p ng-message="required">Tulu peab olema põhjendatud!</p>
+            </div>
+          </div>
+   
+        </div>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-xs-6">
+        <button class="btn btn-default btn-block" type="button" ng-click="vm.loobu()">
+          <span class="fa fa-ban"></span> Loobu
+        </button>
+      </div>
+      <div class="col-xs-6">
+        <button type="submit" class="btn btn-success btn-block" ng-click="vm.kinnita()" ng-disabled="tulu_form.$invalid">
+          <span class="fa fa-save"></span> Kinnita
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

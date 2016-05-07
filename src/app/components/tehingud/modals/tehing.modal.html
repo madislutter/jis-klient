@@ -1,0 +1,286 @@
+<form name="tehing_form" novalidate autocomplete="off">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="vm.loobu()"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title">Tehingu muutmine</h3>
+  </div>
+  <div class="modal-body">
+      <div class="row tehing-detailne-deebet-kreedit-row">
+
+        <div class="col-xs-12 col-md-5">
+          <h3 class="text-center" uib-tooltip="Kahanev vara">Kreedit</h3>
+
+          <div class="form-group">
+            <label>Vara liik</label>
+            <select name="kreedit_tuup" ng-model="vm.tehing.kreedit.tuup" class="form-control" required ng-disabled="!vm.tehing.muudetav" ng-change="vm.onKreeditTuupChanged()">
+              <option value="tuhi">&empty;</option>
+              <option value="sularaha">Sularaha</option>
+              <option value="arvelRaha">Pangakonto</option>
+              <option value="liige">Liige</option>
+              <option value="toode">Toode</option>
+              <option value="taara">Taara</option>
+            </select>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': tehing_form.kreedit_summa.$invalid && tehing_form.kreedit_summa.$dirty}" ng-if="vm.inArray(vm.tehing.kreedit.tuup, ['taara', 'liige', 'sularaha', 'arvelRaha'])">
+            <label>
+              Summa
+              <span class="help-block help-block-inline" ng-show="vm.tehing.kreedit.tuup=='liige'">
+                <small>Ettemaksu suurendamise kogus</small>
+              </span>
+            </label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-euro fa-fw"></i></div>
+              <input type="number" name="kreedit_summa" ng-model="vm.tehing.kreedit.summa" class="form-control" prohibit-zero min="0" pattern="[0-9]*(\.[0-9]{1,2}0*)?" required ng-readonly="!vm.tehing.muudetav" ng-change="vm.syncDeebetSumma()">
+            </div>
+            <div class="control-label" ng-messages="tehing_form.kreedit_summa.$error" ng-show="tehing_form.kreedit_summa.$dirty">
+              <p ng-message="required">Summa peab olema määratud!</p>
+              <p ng-message="number">See ei ole legaalne number! <small>Kasuta koma asemel punkti!</small></p>
+              <p ng-message="min">Summa peab olema suurem kui null!</p>
+              <p ng-message="zero">Summa peab olema suurem kui null!</p>
+              <p ng-message="pattern">Summa ei või olla täpsem kui kaks komakohta!</p>
+            </div>
+          </div>
+
+          <div class="row" ng-if="vm.tehing.kreedit.tuup=='toode'">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Summa</label>
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-euro fa-fw"></i></div>
+                  <input type="number" name="kreedit_summa" ng-model="vm.tehing.kreedit.summa" class="form-control" readonly>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group" ng-class="{'has-error': tehing_form.kreedit_kogus.$invalid && tehing_form.kreedit_kogus.$dirty, 'has-warning': vm.tehing.kreedit.kogus > vm.tehing.kreedit.toode.kogus}">
+                <label>Kogus</label>
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-balance-scale fa-fw"></i></div>
+                  <input type="number" name="kreedit_kogus" prohibit-zero min="0" ng-model="vm.tehing.kreedit.kogus" class="form-control" required ng-readonly="!vm.tehing.muudetav" ng-change="vm.arvutaKreeditSumma()">
+                </div>
+                <div class="control-label" ng-messages="tehing_form.kreedit_kogus.$error" ng-show="tehing_form.kreedit_kogus.$dirty">
+                  <p ng-message="required">Kogus peab olema määratud!</p>
+                  <p ng-message="number">See ei ole legaalne number! <small>Kasuta koma asemel punkti!</small></p>
+                  <p ng-message="min">Kogus peab olema suurem kui null!</p>
+                  <p ng-message="zero">Kogus peab olema suurem kui null!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" ng-if="vm.tehing.kreedit.tuup=='toode'">
+            <label>Nimi</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-qrcode fa-fw"></i></div>
+              <input type="text" name="kreedit_toode" ng-model="vm.tehing.kreedit.toode" class="form-control" uib-typeahead="toode as toode.nimi for toode in vm.tooted | filter:{nimi:$viewValue} | limitTo:8" typeahead-editable="false" typeahead-select-on-blur="true" required ng-readonly="!vm.tehing.muudetav" typeahead-on-select="vm.arvutaKreeditSumma()" typeahead-template-url="app/components/tooted/typeaheadTemplate.html">
+              <div class="input-group-btn">
+                <button class="btn btn-default" uib-tooltip="Skanneeri kaameraga" tabindex="-1">
+                  <span class="fa fa-camera fa-fw"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" ng-if="vm.tehing.kreedit.tuup=='liige'">
+            <label>Nimi</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>
+              <input type="text" name="kreedit_liige" ng-model="vm.tehing.kreedit.liige" class="form-control" uib-typeahead="liige as liige.nimi for liige in vm.liikmed | filter:{nimi:$viewValue} | limitTo:8" typeahead-editable="false" typeahead-select-on-blur="true" typeahead-template-url="app/components/liikmed/typeaheadTemplate.html" required ng-readonly="!vm.tehing.muudetav">
+            </div>
+          </div>
+        </div>
+
+        <!-- // Suur nool paremale -->
+        <div class="col-md-2 hidden-xs hidden-sm text-center">
+          <span class="fa fa-long-arrow-right fa-5x"></span>
+        </div>
+
+        <div class="col-xs-12 col-md-5">
+          <h3 class="text-center" uib-tooltip="Kasvav vara">Deebet</h3>
+
+          <div class="form-group">
+            <label>Vara liik</label>
+            <select name="deebet_tuup" ng-model="vm.tehing.deebet.tuup" class="form-control" required ng-disabled="!vm.tehing.muudetav" ng-change="vm.onDeebetTuupChanged()">
+              <option value="tuhi">&empty;</option>
+              <option value="sularaha">Sularaha</option>
+              <option value="arvelRaha">Pangakonto</option>
+              <option value="liige">Liige</option>
+              <option value="toode">Toode</option>
+              <option value="taara">Taara</option>
+            </select>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': tehing_form.deebet_summa.$invalid && tehing_form.deebet_summa.$dirty}" ng-if="vm.inArray(vm.tehing.deebet.tuup, ['taara', 'liige', 'sularaha', 'arvelRaha'])">
+            <label>
+              Summa
+              <span class="help-block help-block-inline" ng-show="vm.tehing.deebet.tuup=='liige'">
+                <small>Ettemaksu vähendamise kogus</small>
+              </span>
+            </label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-euro fa-fw"></i></div>
+              <input type="number" name="deebet_summa" ng-model="vm.tehing.deebet.summa" class="form-control" prohibit-zero min="0" pattern="[0-9]*(\.[0-9]{1,2}0*)?" required ng-readonly="!vm.tehing.muudetav" ng-change="vm.syncKreeditSumma()">
+            </div>
+            <div class="control-label" ng-messages="tehing_form.deebet_summa.$error" ng-show="tehing_form.deebet_summa.$dirty">
+              <p ng-message="required">Summa peab olema määratud!</p>
+              <p ng-message="number">See ei ole legaalne number! <small>Kasuta koma asemel punkti!</small></p>
+              <p ng-message="min">Summa peab olema suurem kui null!</p>
+              <p ng-message="zero">Summa peab olema suurem kui null!</p>
+              <p ng-message="pattern">Summa ei või olla täpsem kui kaks komakohta!</p>
+            </div>
+          </div>
+
+          <div class="row" ng-if="vm.tehing.deebet.tuup=='toode'">
+            <div class="col-sm-6">
+              <div class="form-group" ng-class="{'has-error': tehing_form.deebet_summa.$invalid && tehing_form.deebet_summa.$dirty}">
+                <label>
+                  Summa
+                  <small>Hind kokku ilma taarata.</small>
+                </label>
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-euro fa-fw"></i></div>
+                  <input type="number" name="deebet_summa" ng-model="vm.tehing.deebet.summa" class="form-control" ng-change="vm.syncKreeditSumma(); vm.arvutaDeebetUhikuHind()" prohibit-zero min="0" required pattern="[0-9]*(\.[0-9]{1,2}0*)?">
+                </div>
+                <div class="control-label" ng-messages="tehing_form.deebet_summa.$error" ng-show="tehing_form.deebet_summa.$dirty">
+                  <p ng-message="required">Summa peab olema määratud!</p>
+                  <p ng-message="number">See ei ole legaalne number! <small>Kasuta koma asemel punkti!</small></p>
+                  <p ng-message="min">Summa peab olema suurem kui null!</p>
+                  <p ng-message="zero">Summa peab olema suurem kui null!</p>
+                  <p ng-message="pattern">Summa ei või olla täpsem kui kaks komakohta!</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group" ng-class="{'has-error': tehing_form.deebet_kogus.$invalid && tehing_form.deebet_kogus.$dirty}">
+                <label>Kogus</label>
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-balance-scale fa-fw"></i></div>
+                  <input type="number" name="deebet_kogus" prohibit-zero min="0" ng-model="vm.tehing.deebet.kogus" class="form-control" required ng-readonly="!vm.tehing.muudetav" ng-change="vm.arvutaDeebetUhikuHind()">
+                </div>
+                <div class="control-label" ng-messages="tehing_form.deebet_kogus.$error" ng-show="tehing_form.deebet_kogus.$dirty">
+                  <p ng-message="required">Kogus peab olema määratud!</p>
+                  <p ng-message="number">See ei ole legaalne number! <small>Kasuta koma asemel punkti!</small></p>
+                  <p ng-message="min">Kogus peab olema suurem kui null!</p>
+                  <p ng-message="zero">Kogus peab olema suurem kui null!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" ng-if="vm.tehing.deebet.tuup=='toode'">
+            <label>Nimi</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-qrcode fa-fw"></i></div>
+              <input type="text" name="deebet_toode" ng-model="vm.tehing.deebet.toode" class="form-control" uib-typeahead="toode as toode.nimi for toode in vm.tooted | filter:{nimi:$viewValue} | limitTo:8" typeahead-editable="false" typeahead-select-on-blur="true" required ng-readonly="!vm.tehing.muudetav" typeahead-template-url="app/components/tooted/typeaheadTemplate.html">
+              <div class="input-group-btn">
+                <button class="btn btn-default" uib-tooltip="Skanneeri kaameraga" tabindex="-1">
+                  <span class="fa fa-camera fa-fw"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" ng-if="vm.tehing.deebet.tuup=='liige'">
+            <label>Nimi</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>
+              <input type="text" name="deebet_liige" ng-model="vm.tehing.deebet.liige" class="form-control" uib-typeahead="liige as liige.nimi for liige in vm.liikmed | filter:{nimi:$viewValue} | limitTo:8" typeahead-editable="false" typeahead-select-on-blur="true" typeahead-template-url="app/components/liikmed/typeaheadTemplate.html" required ng-readonly="!vm.tehing.muudetav">
+            </div>
+          </div>
+
+          <div class="row" ng-if="vm.tehing.deebet.tuup=='toode'">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Ühiku hind ilma taarata</label>
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-euro fa-fw"></i></div>
+                  <input type="number" name="deebet_uhikuHind" ng-model="vm.tehing.deebet.uhikuHind" class="form-control" readonly>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group" ng-class="{'has-error': tehing_form.deebet_aegumiskuupaev.$invalid && tehing_form.deebet_aegumiskuupaev.$touched && tehing_form.deebet_aegumiskuupaev.$dirty}">
+                <label>Toote aegumiskuupäev</label>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="vm.tehing.aegumineDatepickerOpen=!vm.tehing.aegumineDatepickerOpen"><span class="fa fa-calendar fa-fw"></span></button>
+                  </div>
+                  <input type="text" name="deebet_aegumiskuupaev" class="form-control" ng-model="vm.tehing.deebet.aegumiskuupaev" uib-datepicker-popup="d. MMMM yyyy" alt-input-formats="vm.inputFormats" is-open="vm.tehing.aegumineDatepickerOpen" datepicker-options="vm.aegumineDatepickerOptions" show-button-bar="false" popup-placement="top" required>
+                </div>
+                <div class="control-label" ng-messages="tehing_form.deebet_aegumiskuupaev.$error" ng-show="tehing_form.deebet_aegumiskuupaev.$touched && tehing_form.deebet_aegumiskuupaev.$dirty" role="alert">
+                  <p ng-message="required">Toote aegumiskuupäev peab olema määratud!</p>
+                  <p ng-message="date">See ei ole legaalne kuupäev!</p>
+                  <p ng-message="dateDisabled">See kuupäev ei ole lubatud!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-xs-12 col-md-8">
+          <div class="form-group" ng-class="{'has-error': tehing_form.selgitus.$invalid}">
+            <label>Selgitus</label>
+            <textarea name="selgitus" ng-model="vm.tehing.selgitus" class="form-control" ng-required="vm.selgitusRequired(tehing)"></textarea>
+            <div class="control-label" ng-messages="tehing_form.selgitus.$error">
+              <p ng-message="required">Selline tehing vajab selgitust!</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-4">
+
+          <div class="row">
+
+            <div class="col-xs-12">
+              <div class="form-group" ng-class="{'has-error': (tehing_form.kuupaev.$invalid && tehing_form.kuupaev.$touched && tehing_form.kuupaev.$dirty) || tehing_form.$error.dateDisabled}">
+                <label>Tehingu kuupäev</label>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="vm.tehing.datepickerOpen=!vm.tehing.datepickerOpen" ng-disabled="!vm.tehing.muudetav"><span class="fa fa-calendar fa-fw"></span></button>
+                  </div>
+                  <input type="text" name="kuupaev" class="form-control" ng-model="vm.tehing.aeg" uib-datepicker-popup="d. MMMM yyyy" alt-input-formats="vm.inputFormats" is-open="vm.tehing.datepickerOpen" datepicker-options="vm.datepickerOptions" show-button-bar="false" popup-placement="top" init-date="vm.tehing.aeg" required ng-readonly="!vm.tehing.muudetav">
+                </div>
+                <div class="control-label" ng-messages="tehing_form.kuupaev.$error" ng-show="tehing_form.kuupaev.$touched && tehing_form.kuupaev.$dirty" role="alert">
+                  <p ng-message="required">Tehingu kuupäev peab olema määratud!</p>
+                  <p ng-message="date">See ei ole legaalne kuupäev!</p>
+                </div>
+                <div class="control-label" ng-messages="tehing_form.$error" ng-show="tehing_form.$error.dateDisabled" role="alert">
+                  <p ng-message="dateDisabled">See kuupäev ei ole lubatud!</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-12">
+              <div class="form-group" ng-class="{'has-error': tehing_form.kell.$invalid && tehing_form.kell.$touched && tehing_form.kell.$dirty}">
+                <label>Tehingu kellaaeg</label>
+                <uib-timepicker ng-model="vm.tehing.kell" show-meridian="false" show-seconds="true" show-spinners="false" required name="kell" readonly-input="!vm.tehing.muudetav" mousewheel="vm.tehing.muudetav"></uib-timepicker>
+                <div class="control-label" ng-messages="tehing_form.kell.$error" ng-show="tehing_form.kell.$touched && tehing_form.kell.$dirty" role="alert">
+                  <p ng-message="required">Tehingu kellaaeg peab olema määratud!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-xs-6">
+        <button class="btn btn-default btn-block" type="button" ng-click="vm.loobu()">
+          <span class="fa fa-ban"></span> Loobu
+        </button>
+      </div>
+      <div class="col-xs-6">
+        <button type="submit" class="btn btn-success btn-block" ng-click="vm.kinnita()" ng-disabled="tehing_form.$invalid || tehing_form.$pristine">
+          <span class="fa fa-save"></span> Salvesta
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

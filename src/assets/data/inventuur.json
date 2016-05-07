@@ -1,0 +1,61 @@
+{
+  "id": "oij0a9",
+  "aeg": "2016-01-01T06:36:09.004Z",
+  "kommentaar": "Siia saab teha märkmeid. Näiteks, põhjendada, miks numbrid nii valed on millegipärast.",
+  "sooritajad": [
+    {
+      "id": "casdnc",
+      "staatus": "ksv!",
+      "nimi": "Madis Martin Lutter"
+    },
+    {
+      "id": "asytcf",
+      "staatus": "ksv!",
+      "nimi": "Kaarel Ratas"
+    }
+  ],
+  "kustutatav": true,
+  "eeldatav": {
+    "sularaha": 389.97,
+    "arvelRaha": 2234.65,
+    "krediit": 300.01,
+    "taara": 12.3,
+    "tootedKokku": 66.846,
+    "kokku": 3003.056
+  },
+  "loetud": {
+    "sularaha": 389.97,
+    "taara": 12.3,
+    "tootedKokku": 66.086,
+    "kokku": 3002.296
+  },
+  "tooted": [
+    {
+      "id": "ax7Gji",
+      "nimi": "A. Le Coq Premium",
+      "taara": "klaaspudel",
+      "uhikuKogus": "0,5l",
+      "eeldatavKogus": 54,
+      "loetudKogus": 54,
+      "omahind": 0.909
+    },
+    {
+      "id": "239e8h",
+      "nimi": "A. Le Coq Special",
+      "taara": "purk",
+      "uhikuKogus": "1 pint",
+      "eeldatavKogus": 1,
+      "loetudKogus": 0,
+      "omahind": 0.76
+    },
+    {
+      "id": "100e8h",
+      "nimi": "Milka Daim",
+      "taara": null,
+      "uhikuKogus": "100 grammi",
+      "eeldatavKogus": 20,
+      "loetudKogus": 20,
+      "omahind": 0.85
+    }
+  ]
+}

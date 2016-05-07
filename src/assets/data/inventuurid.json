@@ -1,0 +1,42 @@
+[
+  {
+    "id": "oij0a9",
+    "aeg": "2016-01-01T06:36:09.004Z",
+    "kommentaar": "Siia saab teha märkmeid. Näiteks, põhjendada, miks numbrid nii valed on millegipärast.",
+    "kustutatav": true,
+    "eeldatav": {
+      "sularaha": 389.97,
+      "arvelRaha": 2234.65,
+      "krediit": 300.01,
+      "taara": 12.3,
+      "tootedKokku": 66.846,
+      "kokku": 3003.056
+    },
+    "loetud": {
+      "sularaha": 389.97,
+      "taara": 12.3,
+      "tootedKokku": 66.086,
+      "kokku": 3002.296
+    }
+  },
+  {
+    "id": "oij0e9",
+    "aeg": "2016-02-01T06:36:09.004Z",
+    "kommentaar": "Inimesed tõid ise taarat juurde.",
+    "kustutatav": true,
+    "eeldatav": {
+      "sularaha": 320.97,
+      "arvelRaha": 2200.65,
+      "krediit": 300.01,
+      "taara": 16.3,
+      "tootedKokku": 89.846,
+      "kokku": 2927.776
+    },
+    "loetud": {
+      "sularaha": 320.97,
+      "taara": 0.3,
+      "tootedKokku": 100.086,
+      "kokku": 2922.016
+    }
+  }
+]
